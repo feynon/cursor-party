@@ -3,20 +3,26 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "partykit dev",
-    "deploy": "partykit deploy --with-vars"
+    "build": "node scripts/build.mjs",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/worker.test.mjs"
   },
   "dependencies": {
     "@msgpack/msgpack": "^3.0.0-beta2",
     "@preact/compat": "^17.1.2",
-    "partysocket": "0.0.17",
-    "zustand": "^4.4.7"
+    "partyserver": "^0.5.10",
+    "partysocket": "^1.3.0",
+    "zustand": "^4.4.7",
+    "zod": "^3.25.76"
   },
   "devDependencies": {
     "@types/react": "^18.2.42",
     "@types/react-dom": "^18.2.17",
-    "dotenv": "^16.3.1",
-    "partykit": "^0.0.0-1dfa367",
+    "@cloudflare/workers-types": "^5.20261009.1",
+    "esbuild": "^0.25.0",
+    "wrangler": "^4.149.0",
     "typescript": "^5.3.3"
   }
 }

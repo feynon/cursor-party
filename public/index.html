@@ -19,7 +19,6 @@
 
     <link rel="stylesheet" href="/normalize.css" />
     <link rel="stylesheet" href="/styles.css" />
-    <script src="/meta.js"></script>
   </head>
   <body>
     <main>
@@ -39,38 +38,7 @@
         <hr />
         <h2>You’re looking at a custom Cursor Party installation</h2>
 
-        <script>
-          if (window.__WEBSITES__) {
-            var websites;
-            try {
-              websites = JSON.parse(window.__WEBSITES__);
-
-              document.write(`<p>The following websites are in the allowlist:</p>`);
-              document.write(`<ul>`);
-              websites.forEach((website) => {
-                document.write(`<li><code>${website}</code></li>`);
-              });
-              document.write(`</ul>`);
-            } catch (e) {
-              document.write(
-                `<p>
-                  <span style="background: yellow">
-                    There was an error parsing the allowlist: ${e}
-                  </span>
-                </p>`
-              );
-            }
-          } else {
-            document.write(`
-            <p>
-              <span style="background: yellow">
-                Please create an .env file by copying .env.example, and edit it 
-                to add your website to the allowlist.
-              </span>
-            </p>
-            `);
-          }
-        </script>
+        <p>The website allowlist is configured in <code>wrangler.jsonc</code>.</p>
 
         <p>
           Check the installation is working by opening two browser windows to
@@ -84,7 +52,7 @@
         </p>
         <input
           type="text"
-          value='&lt;script src="https://cursor-party.YOUR-PARTYKIT-USERNAME.partykit.dev/cursors.js">&lt;/script&gt;'
+          id="embed-code"
           readonly
         />
         <p>
@@ -95,6 +63,10 @@
         </p>
       </section>
     </main>
+    <script>
+      document.getElementById("embed-code").value =
+        '<script src="' + location.origin + '/cursors.js"><' + '/script>';
+    </script>
     <script src="/cursors.js"></script>
   </body>
 </html>

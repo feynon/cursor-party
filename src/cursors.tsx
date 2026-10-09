@@ -3,7 +3,10 @@ import { render } from "react-dom";
 import PresenceProvider from "./presence/presence-context";
 import Cursors from "./presence/Cursors";
 
-declare const PARTYKIT_HOST: string;
+// Resolve the WebSocket host from the script URL so the same build works on
+// workers.dev, custom domains and localhost without baking in a deployment URL.
+const script = document.currentScript as HTMLScriptElement | null;
+const cursorHost = new URL(script?.src || "/cursors.js", window.location.href).host;
 
 const pageId = window?.location.href
   ? btoa(window.location.href.split(/[?#]/)[0])
@@ -12,7 +15,7 @@ const pageId = window?.location.href
 function App() {
   return (
     <PresenceProvider
-      host={PARTYKIT_HOST}
+      host={cursorHost}
       room={pageId}
       presence={{
         name: "Anonymous User",
